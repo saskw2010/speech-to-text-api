@@ -1,0 +1,2 @@
+# Ignore Google Cloud credentials and other secrets
+keys/speech-key.json
