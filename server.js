@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const multer = require('multer');
 const fs = require('fs');
 const speech = require('@google-cloud/speech');
@@ -6,7 +7,14 @@ const axios = require('axios');
 const path = require('path');
 
 const app = express();
+app.use(cors());
+app.use(express.static('public'));
 const port = process.env.PORT || 8080;
+
+// Root route for status or welcome message
+app.get('/', (req, res) => {
+  res.send('Speech-to-Text API is running. Use POST /transcribe to transcribe audio.');
+});
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, 'keys', 'speech-key.json');
 

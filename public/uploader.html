@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Voice Upload to Speech-to-Text</title>
+</head>
+<body>
+  <h2>🎙️ Upload Your Voice</h2>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" accept="audio/webm,audio/wav" required />
+    <button type="submit">Upload</button>
+  </form>
+
+  <pre id="output"></pre>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const output = document.getElementById('output');
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const res = await fetch("https://speech-to-text-api-248374495051.europe-west4.run.app/transcribe", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>
