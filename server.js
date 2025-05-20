@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   res.send('Speech-to-Text API is running. Use POST /transcribe to transcribe audio.');
 });
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, 'keys', 'speech-key.json');
+process.env.GOOGLE_APPLICATION_CREDENTIALS = '/secrets/speech-api-key';
 
 const upload = multer({ dest: 'uploads/' });
 const client = new speech.SpeechClient();
